@@ -26,7 +26,8 @@ public class Main {
                         System.out.println("Contact Number: " + tenant.getContact());
                         break;
                     case 2:
-                        System.out.println("Showing property listing: ...");
+                       //this will show all properties  of different agents
+                        db.showPropertyListing();
                         break;
                     case 3:
                         System.out.println("applied for leasing");
@@ -56,19 +57,19 @@ public class Main {
                         System.out.println("Contact Number: " + agent.getContact());
                         break;
                     case 2:
-                        System.out.println("Showing property listing: ...");
+                        agent.showPropertyListing();
                         break;
                     case 3:
                         System.out.println("Show property lease request: ...");
                         break;
                     case 4:
-                        System.out.println("Add property: ...");
+                        agent.createProperty();
                         break;
                     case 5:
-                        System.out.println("Remove property: ...");
+                        agent.deleteProperty();
                         break;
                     case 6:
-                        System.out.println("edit property: ...");
+                        agent.updateProperty();
                         break;
                     case 7:
                         agent = null;
@@ -163,6 +164,7 @@ public class Main {
     public static void waitForInput(){
         System.out.println("Press Enter to continue...");
         scan.nextLine();
+        scan.nextLine(); //to handle enter key after a numeric input
     }
 }
 
@@ -180,4 +182,11 @@ class Database{
         return agent;
     }
 
+    public void showPropertyListing(){
+        System.out.println("Showing property listing: ..."); 
+        for(Agent agent : agents){
+            System.out.println("Agent: " + agent.getUsername());
+            agent.showPropertyListing();
+        }
+    }
 }
