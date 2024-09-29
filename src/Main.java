@@ -2,12 +2,14 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import management.user.*;
 
+
+//The main driver for our program
 public class Main {
     static Scanner scan = new Scanner(System.in);
     public static void main(String[] args) {
         Tenant tenant = null;  //this will be used to validate session
         Agent agent = null;    //this will be used to validate session
-        Database db = new Database();
+        Database db = new Database();   //this object will handle read and write operations on the arraylists of tenant and agents
         String username, password;
         int contact,choice;
 
@@ -94,7 +96,17 @@ public class Main {
                         switch (loginType) {
                             case 1:
                                 System.out.println("You have chosen to login as Tenant.");
-                                // Handle tenant login logic here
+                                System.out.println("Enter your username: ");
+                                username = scan.next();
+                                System.out.println("Enter your password: ");
+                                password = scan.next();
+                                //calling function to validate tenant login credentials in Tenants array list
+                                tenant = db.ValidateTenantLogin(username, password);
+                                if(tenant == null){
+                                    System.out.println("Invalid credentials.");
+                                }else{
+                                    System.out.println("Logged in successfully as Tenant.");
+                                }
                                 break;
                             case 2:
                                 System.out.println("You have chosen to login as Agent.");
@@ -180,6 +192,15 @@ class Database{
         Agent agent = new Agent(username, password, contact);
         agents.add(agent);
         return agent;
+    }
+
+    public Tenant ValidateTenantLogin(String username, String password){
+        for(Tenant tenant : tenants){
+            if(tenant.getUsername().equals(username) && tenant.login(username, password)){
+                return tenant;
+            }
+        }
+        return null;
     }
 
     public void showPropertyListing(){

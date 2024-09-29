@@ -31,4 +31,9 @@ public class Tenant implements Manageable
         return this.username;
     }
 
+    public void propertyListing(){
+        System.out.println("Property Listings:");
+        //implement listing of properties
+    }
+
 }
