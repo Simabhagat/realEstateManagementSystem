@@ -9,12 +9,13 @@ public class Tenant implements Manageable
     private String password;
 
     public Tenant(String username, String password, int contactNumber){
-        this.username = username;
+        this.username = username; 
         this.contactNumber = contactNumber;
         this.password = password;
         System.out.println("Tenant account created:  "+ this.username);
     }
     public boolean login(String username, String password){
+        System.out.println("test");
         return this.username == username && this.password == password;
     } 
             

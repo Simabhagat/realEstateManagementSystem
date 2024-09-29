@@ -138,7 +138,6 @@ public class Main {
                                 if(tenant == null){
                                     System.out.println("Failed to create a tenant");
                                 }
-                                System.out.println("Account successfully created. ");
                                 break;
                             case 2:
                                 System.out.println("You have chosen to register as Agent.");
@@ -186,6 +185,7 @@ class Database{
     public Tenant AddTenentAccount(String username, String password , int contact){
         Tenant tenant = new Tenant(username, password, contact);
         tenants.add(tenant);
+        System.out.println(tenants.get(0).getUsername());
         return tenant;
     }
     public Agent AddAgentAccount(String username, String password,int contact){
@@ -196,7 +196,8 @@ class Database{
 
     public Tenant ValidateTenantLogin(String username, String password){
         for(Tenant tenant : tenants){
-            if(tenant.getUsername().equals(username) && tenant.login(username, password)){
+            if(tenant.getUsername().equals(username)){
+                System.out.println("test in login if");
                 return tenant;
             }
         }
